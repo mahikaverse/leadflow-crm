@@ -13,22 +13,34 @@ connectDB();
 
 const app = express();
 
+const allowedOrigins = [
+  "http://localhost:8080",
+  "https://leadflow-crm-red.vercel.app",
+  "https://leadflow-dsggd7291-mahikaverses-projects.vercel.app",
+  "https://leadflow-h2d8y60ta-mahikaverses-projects.vercel.app",
+];
+
+const vercelPreviewOrigin = /^https:\/\/leadflow-[a-z0-9-]+-mahikaverses-projects\.vercel\.app$/;
+
 // Middleware
- app.use(
+app.use(
   cors({
-    origin: [
-      "http://localhost:8080",
-      "https://leadflow-crm-red.vercel.app",
-      "https://leadflow-dsggd7291-mahikaverses-projects.vercel.app",
-    ],
+    origin(origin, callback) {
+      if (!origin || allowedOrigins.includes(origin) || vercelPreviewOrigin.test(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error(`CORS blocked origin: ${origin}`));
+    },
     credentials: true,
   })
 );
 app.use(express.json());
 
 // Routes
-app.use('/api/auth', authRoutes);
-app.use('/api', leadRoutes);
+const apiRouter = express.Router();
+apiRouter.use('/auth', authRoutes);
+apiRouter.use('/', leadRoutes);
+app.use('/api', apiRouter);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
