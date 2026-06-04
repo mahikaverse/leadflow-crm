@@ -130,7 +130,7 @@ JWT_SECRET=your_jwt_secret
 ### Frontend (.env)
 
 ```env
-VITE_API_URL=http://localhost:5000
+VITE_API_URL=https://leadflow-crm-hm7v.onrender.com
 ```
 
 ---

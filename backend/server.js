@@ -19,6 +19,7 @@ const app = express();
     origin: [
       "http://localhost:8080",
       "https://leadflow-crm-red.vercel.app",
+      "https://leadflow-dsggd7291-mahikaverses-projects.vercel.app",
     ],
     credentials: true,
   })
