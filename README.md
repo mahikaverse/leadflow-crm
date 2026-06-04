@@ -2,7 +2,17 @@
 
 A modern full-stack Customer Relationship Management (CRM) platform built to help businesses manage leads, track follow-ups, monitor sales pipelines, and analyze performance through real-time dashboards.
 
-## 🚀 Features
+## Live Demo
+
+Frontend: https://leadflow-crm-red.vercel.app/login
+
+Backend API: https://leadflow-crm-hm7v.onrender.com
+
+GitHub Repository: https://github.com/mahikaverse/leadflow-crm
+
+---
+
+## Features
 
 ### Authentication & Security
 
@@ -14,14 +24,11 @@ A modern full-stack Customer Relationship Management (CRM) platform built to hel
 
 ### Lead Management
 
-* Create, Edit, Delete Leads
-* Lead Details Page
+* Create, Edit & Delete Leads
 * Lead Status Tracking
-* Lead Value Tracking
-* Notes Management
-* Activity History
-* Search Leads
-* Filter & Sort Leads
+* Deal Value Tracking
+* Lead Notes & Activity History
+* Search, Filter & Sort Leads
 * Pagination Support
 * CSV Export
 
@@ -32,44 +39,41 @@ A modern full-stack Customer Relationship Management (CRM) platform built to hel
 * Converted Leads
 * Lost Leads
 * Conversion Rate
-* Upcoming Follow-Ups
-* Real-Time KPI Cards
+* Follow-up Overview
+* Real-time KPI Cards
 
 ### Analytics
 
-* Status Distribution Pie Chart
+* Status Distribution
 * Lead Source Performance
 * Monthly Growth Trends
 * Conversion Funnel
 * Top Companies Analysis
 * Revenue Analytics
 * Pipeline Value Tracking
-* Average Deal Size Calculation
 
 ### Follow-Up Management
 
-* Upcoming Follow-Ups
-* Overdue Follow-Ups
-* Due Today Follow-Ups
-* Completed Follow-Ups
-* Follow-Up Tracking & Completion
+* Upcoming Follow-ups
+* Due Today Follow-ups
+* Overdue Follow-ups
+* Completed Follow-ups
 
 ### Kanban Board
 
-* Drag & Drop Lead Status Updates
+* Drag & Drop Lead Management
 * Visual Sales Pipeline
-* Real-Time Status Synchronization
+* Real-time Status Updates
 
 ### User Settings
 
 * Profile Management
 * Account Settings
-* Theme Preferences
 * Dark Mode Support
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 ### Frontend
 
@@ -94,105 +98,53 @@ A modern full-stack Customer Relationship Management (CRM) platform built to hel
 
 ---
 
-## 📂 Project Structure
-
-```bash
-leadflow-crm/
-│
-├── frontend/
-│   ├── src/
-│   ├── public/
-│   └── package.json
-│
-├── backend/
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
-│   ├── middleware/
-│   └── server.js
-│
-└── README.md
-```
-
----
-
-## ⚙️ Environment Variables
+## Environment Variables
 
 ### Backend (.env)
 
-```env
 NODE_ENV=development
+
 PORT=5000
+
 MONGO_URI=your_mongodb_connection_string
+
 JWT_SECRET=your_jwt_secret
-```
 
 ### Frontend (.env)
 
-```env
 VITE_API_URL=https://leadflow-crm-hm7v.onrender.com
-```
 
 ---
 
-## 🖥️ Local Installation
+## Local Setup
 
 ### Clone Repository
 
-```bash
-git clone https://github.com/yourusername/leadflow-crm.git
+git clone https://github.com/mahikaverse/leadflow-crm.git
+
 cd leadflow-crm
-```
 
-### Install Dependencies
+### Backend Setup
 
-Backend:
-
-```bash
 cd backend
+
 npm install
-```
 
-Frontend:
+npm run dev
 
-```bash
+### Frontend Setup
+
 cd frontend
+
 npm install
-```
 
-### Run Backend
-
-```bash
-cd backend
 npm run dev
-```
-
-### Run Frontend
-
-```bash
-cd frontend
-npm run dev
-```
 
 ---
 
-## 📊 Key Metrics Tracked
+## Security Features
 
-* Total Leads
-* Active Leads
-* Converted Leads
-* Lost Leads
-* Conversion Rate
-* Pipeline Revenue
-* Average Deal Size
-* Lead Source Performance
-* Monthly Growth Trends
-
----
-
-## 🔒 Security Features
-
-* JWT Token Authentication
+* JWT Authentication
 * Password Hashing
 * Protected API Routes
 * User Data Isolation
@@ -200,50 +152,49 @@ npm run dev
 
 ---
 
-## 🌐 Deployment
+## Deployment
 
 ### Frontend
 
-Deployed using Vercel.
+Vercel
 
 ### Backend
 
-Deployed using Render.
+Render
 
 ### Database
 
-MongoDB Atlas.
+MongoDB Atlas
 
 ---
 
-## 📈 Future Enhancements
+## Future Improvements
 
 * Role-Based Access Control (RBAC)
 * Email Notifications
-* Lead Assignment System
 * File Attachments
-* Real-Time Updates (Socket.io)
-* Email Marketing Integration
+* Real-Time Updates
 * Advanced Reporting
+* Lead Assignment System
 
 ---
 
-## 👩‍💻 Author
+## Author
 
-**Mahika Chaurasiya**
+Mahika Chaurasiya
 
-Full Stack Developer | Engineering Student
+Engineering Student | Full Stack Developer
 
 GitHub: https://github.com/mahikaverse
 
 ---
 
-## ⭐ Project Highlights
+## Project Highlights
 
 * Full Stack CRM Application
-* Real-Time Analytics Dashboard
-* JWT Authentication
 * MongoDB Atlas Integration
-* Responsive Design
+* JWT Authentication
+* Real-time Analytics
+* Responsive UI
 * Production-Ready Architecture
 * User-Specific Data Management
