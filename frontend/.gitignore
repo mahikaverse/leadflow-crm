@@ -30,3 +30,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.vercel
+.vercel/
+.vercel/output/
+dist/
+node_modules/
+.env
+.env.local
