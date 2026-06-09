@@ -49,6 +49,28 @@ campaignId: {
     default: 0,
   },
 
+
+  verificationStatus: {
+  type: String,
+  enum: ["pending", "verified", "rejected"],
+  default: "pending",
+  },
+
+  leadScore: {
+    type: Number,
+    default: 0,
+  },
+  
+  emailVerified: {
+  type: Boolean,
+  default: false,
+},
+
+verificationToken: {
+  type: String,
+  default: null,
+},
+
   status: {
     type: String,
     enum: ['New', 'Contacted', 'Qualified', 'Converted', 'Lost'],

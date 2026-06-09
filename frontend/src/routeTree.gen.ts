@@ -18,6 +18,7 @@ import { Route as KanbanRouteImport } from './routes/kanban'
 import { Route as FollowupsRouteImport } from './routes/followups'
 import { Route as AnalyticsRouteImport } from './routes/analytics'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as VerifyEmailTokenRouteImport } from './routes/verify-email.$token'
 import { Route as LeadsIdRouteImport } from './routes/leads.$id'
 
 const SettingsRoute = SettingsRouteImport.update({
@@ -65,6 +66,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VerifyEmailTokenRoute = VerifyEmailTokenRouteImport.update({
+  id: '/verify-email/$token',
+  path: '/verify-email/$token',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LeadsIdRoute = LeadsIdRouteImport.update({
   id: '/$id',
   path: '/$id',
@@ -82,6 +88,7 @@ export interface FileRoutesByFullPath {
   '/register': typeof RegisterRoute
   '/settings': typeof SettingsRoute
   '/leads/$id': typeof LeadsIdRoute
+  '/verify-email/$token': typeof VerifyEmailTokenRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -94,6 +101,7 @@ export interface FileRoutesByTo {
   '/register': typeof RegisterRoute
   '/settings': typeof SettingsRoute
   '/leads/$id': typeof LeadsIdRoute
+  '/verify-email/$token': typeof VerifyEmailTokenRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -107,6 +115,7 @@ export interface FileRoutesById {
   '/register': typeof RegisterRoute
   '/settings': typeof SettingsRoute
   '/leads/$id': typeof LeadsIdRoute
+  '/verify-email/$token': typeof VerifyEmailTokenRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -121,6 +130,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/settings'
     | '/leads/$id'
+    | '/verify-email/$token'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -133,6 +143,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/settings'
     | '/leads/$id'
+    | '/verify-email/$token'
   id:
     | '__root__'
     | '/'
@@ -145,6 +156,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/settings'
     | '/leads/$id'
+    | '/verify-email/$token'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -157,6 +169,7 @@ export interface RootRouteChildren {
   ProfileRoute: typeof ProfileRoute
   RegisterRoute: typeof RegisterRoute
   SettingsRoute: typeof SettingsRoute
+  VerifyEmailTokenRoute: typeof VerifyEmailTokenRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -224,6 +237,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/verify-email/$token': {
+      id: '/verify-email/$token'
+      path: '/verify-email/$token'
+      fullPath: '/verify-email/$token'
+      preLoaderRoute: typeof VerifyEmailTokenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/leads/$id': {
       id: '/leads/$id'
       path: '/$id'
@@ -254,6 +274,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProfileRoute: ProfileRoute,
   RegisterRoute: RegisterRoute,
   SettingsRoute: SettingsRoute,
+  VerifyEmailTokenRoute: VerifyEmailTokenRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -13,6 +13,7 @@ function ownerQuery(req) {
   return { owner: { $in: [req.user._id, req.user._id.toString()] } };
 }
 
+ 
 function parseLeadValue(value) {
   const parsed = Number(value);
   return Number.isFinite(parsed) ? Math.max(0, parsed) : 0;
@@ -44,6 +45,8 @@ async function getLeads(req, res) {
   try {
     const { q, status, source, company, sort = 'created' } = req.query;
     const query = ownerQuery(req);
+    query.emailVerified = true;
+
     if (status && statuses.includes(status)) query.status = status;
     if (source) query.source = source;
     if (company) query.company = company;

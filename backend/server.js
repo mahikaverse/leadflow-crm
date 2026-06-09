@@ -1,13 +1,16 @@
+require("dotenv").config();
 const express = require('express');
-const dotenv = require('dotenv');
 const cors = require('cors');
 const connectDB = require('./config/db');
 const leadRoutes = require('./routes/leadRoutes');
 const authRoutes = require('./routes/authRoutes');
 const webhookRoutes = require("./routes/webhookRoutes");
+const verificationRoutes = require(
+  "./routes/verificationRoutes"
+);
 
 // Load environment variables
-dotenv.config();
+ 
 
 // Connect to database
 connectDB();
@@ -42,7 +45,9 @@ const apiRouter = express.Router();
 apiRouter.use('/auth', authRoutes);
 apiRouter.use('/webhooks', webhookRoutes);
 apiRouter.use('/', leadRoutes);
+app.use("/api/verify-email",verificationRoutes);
 app.use('/api', apiRouter);
+ 
 
 // Error handling middleware
 app.use((err, req, res, next) => {
