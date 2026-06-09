@@ -12,12 +12,37 @@ const leadSchema = new mongoose.Schema({
     required: [true, 'Please add a name'],
   },
   email: {
-    type: String,
-    required: [true, 'Please add an email'],
-  },
-  phone: String,
+  type: String,
+  required: [true, 'Please add an email'],
+  trim: true,
+  lowercase: true,
+},
+ phone: {
+  type: String,
+  trim: true,
+},
   company: String,
   source: String,
+
+platform: {
+  type: String,
+  default: ""
+},
+
+campaign: {
+  type: String,
+  default: ""
+},
+
+adset: {
+  type: String,
+  default: ""
+},
+
+campaignId: {
+  type: String,
+  default: ""
+},
 
   value: {
     type: Number,

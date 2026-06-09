@@ -4,6 +4,7 @@ const cors = require('cors');
 const connectDB = require('./config/db');
 const leadRoutes = require('./routes/leadRoutes');
 const authRoutes = require('./routes/authRoutes');
+const webhookRoutes = require("./routes/webhookRoutes");
 
 // Load environment variables
 dotenv.config();
@@ -39,6 +40,7 @@ app.use(express.json());
 // Routes
 const apiRouter = express.Router();
 apiRouter.use('/auth', authRoutes);
+apiRouter.use('/webhooks', webhookRoutes);
 apiRouter.use('/', leadRoutes);
 app.use('/api', apiRouter);
 
