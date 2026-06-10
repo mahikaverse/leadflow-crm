@@ -21,7 +21,8 @@
     "libphonenumber-js": "^1.13.6",
     "mongoose": "^9.6.3",
     "ngrok": "^5.0.0-beta.2",
-    "nodemailer": "^8.0.10"
+    "nodemailer": "^8.0.10",
+    "resend": "^6.12.4"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
