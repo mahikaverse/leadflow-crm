@@ -17,7 +17,21 @@ function Dashboard() {
   const { leads, loading } = useLeads();
   const [analytics, setAnalytics] = useState<api.Analytics | null>(null);
   const [addOpen, setAddOpen] = useState(false);
-  useEffect(() => { api.getAnalytics().then(setAnalytics).catch(() => setAnalytics(null)); }, [leads]);
+ useEffect(() => {
+  console.log(
+    "API URL:",
+    import.meta.env.VITE_API_URL
+  );
+
+  api.getAnalytics().then((data) => {
+    console.log(
+      "ANALYTICS RESPONSE:",
+      data
+    );
+    setAnalytics(data);
+  });
+
+}, [leads]);
   const recent = useMemo(() => leads.slice().sort((a, b) => +new Date(b.updatedAt) - +new Date(a.updatedAt)).slice(0, 6), [leads]);
   const monthly = (analytics?.monthlyGrowth || []).map((row) => ({ ...row, label: new Date(row.year, row.month - 1).toLocaleDateString("en-US", { month: "short", year: "2-digit" }) }));
   const localStats = useMemo(() => {

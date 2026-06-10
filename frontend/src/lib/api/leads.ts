@@ -20,6 +20,10 @@ export interface Lead {
   name: string;
   email: string;
   phone: string;
+
+  emailVerified: boolean;
+  verificationStatus?: string;
+
   company: string;
   source: string;
   value: number;
@@ -30,6 +34,7 @@ export interface Lead {
   followUpCompletedAt?: string;
   createdAt: string;
   updatedAt: string;
+  
 }
 
 export type LeadInput = Partial<Omit<Lead, "_id" | "notes" | "activities" | "createdAt" | "updatedAt">> & {

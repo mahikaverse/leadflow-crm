@@ -28,6 +28,7 @@ function LeadsPage() {
   const [q, setQ] = useState("");
   const [status, setStatus] = useState("all");
   const [company, setCompany] = useState("all");
+  const [verification, setVerification] = useState("all");
   const [sort, setSort] = useState<"name" | "created" | "followup" | "value">("created");
   const [page, setPage] = useState(1);
   const [addOpen, setAddOpen] = useState(false);
@@ -43,6 +44,11 @@ function LeadsPage() {
     }
     if (status !== "all") r = r.filter((l) => l.status === status);
     if (company !== "all") r = r.filter((l) => l.company === company);
+    if (verification === "verified")
+    r = r.filter((l) => l.emailVerified);
+
+    if (verification === "unverified")
+    r = r.filter((l) => !l.emailVerified);
     r = [...r].sort((a, b) => {
       if (sort === "name") return a.name.localeCompare(b.name);
       if (sort === "followup") return +new Date(a.followUpDate || 0) - +new Date(b.followUpDate || 0);
@@ -50,13 +56,13 @@ function LeadsPage() {
       return +new Date(b.createdAt) - +new Date(a.createdAt);
     });
     return r;
-  }, [leads, q, status, company, sort]);
+  }, [leads, q, status, company,verification, sort]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const pageRows = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   function exportCSV() {
-    const headers = ["Name", "Email", "Phone", "Company", "Source", "Status", "Deal Value", "Follow-up", "Created"];
+    const headers = ["Name", "Email", "Phone","verification", "Company", "Source", "Status", "Deal Value", "Follow-up", "Created"];
     const rows = filtered.map((l) => [l.name, l.email, l.phone, l.company, l.source, l.status, l.value, formatDate(l.followUpDate), formatDate(l.createdAt)]);
     const csv = [headers, ...rows].map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(",")).join("\n");
     const blob = new Blob([csv], { type: "text/csv" });
@@ -122,6 +128,27 @@ function LeadsPage() {
                 {companies.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}
               </SelectContent>
             </Select>
+
+                        <Select
+              value={verification}
+              onValueChange={(v) => {
+                setVerification(v);
+                setPage(1);
+              }}
+            >
+              <SelectTrigger className="h-10 w-[170px] rounded-xl">
+                <SelectValue placeholder="Verification" />
+              </SelectTrigger>
+
+              <SelectContent>
+                <SelectItem value="all">All Leads</SelectItem>
+                <SelectItem value="verified">Verified</SelectItem>
+                <SelectItem value="unverified">Unverified</SelectItem>
+              </SelectContent>
+            </Select>
+
+
+
             <Select value={sort} onValueChange={(v) => setSort(v as any)}>
               <SelectTrigger className="h-10 w-[150px] rounded-xl"><SelectValue /></SelectTrigger>
               <SelectContent>
@@ -144,6 +171,8 @@ function LeadsPage() {
                 <th className="px-5 py-3">Contact</th>
                 <th className="px-5 py-3">Source</th>
                 <th className="px-5 py-3">Status</th>
+                <th className="px-5 py-3">Email Verification</th>
+                 
                 <th className="px-5 py-3">Value</th>
                 <th className="px-5 py-3">Follow-up</th>
                 <th className="px-5 py-3">Created</th>
@@ -167,8 +196,25 @@ function LeadsPage() {
                   <td className="px-5 py-3.5 text-sm">{l.company}</td>
                   <td className="px-5 py-3.5 text-sm text-muted-foreground">{l.phone}</td>
                   <td className="px-5 py-3.5 text-sm"><span className="rounded-md bg-muted px-2 py-0.5 text-xs font-medium">{l.source}</span></td>
-                  <td className="px-5 py-3.5"><StatusBadge status={l.status} /></td>
-                  <td className="px-5 py-3.5 text-sm font-semibold text-success">{formatCurrency(l.value)}</td>
+                  <td className="px-5 py-3.5">
+                  <StatusBadge status={l.status} />
+                </td>
+
+                <td className="px-5 py-3.5">
+                  {l.emailVerified ? (
+                    <span className="rounded-md bg-green-100 px-2 py-1 text-xs font-semibold text-green-700">
+                      Verified
+                    </span>
+                  ) : (
+                    <span className="rounded-md bg-red-100 px-2 py-1 text-xs font-semibold text-red-700">
+                      Unverified
+                    </span>
+                  )}
+                </td>
+
+                <td className="px-5 py-3.5 text-sm font-semibold text-success">
+                  {formatCurrency(l.value)}
+                </td>
                   <td className="px-5 py-3.5 text-sm">{formatDate(l.followUpDate)}</td>
                   <td className="px-5 py-3.5 text-sm text-muted-foreground">{formatDate(l.createdAt)}</td>
                   <td className="px-5 py-3.5">

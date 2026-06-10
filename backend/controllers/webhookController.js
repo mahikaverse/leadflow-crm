@@ -152,15 +152,22 @@ if (duplicateConditions.length > 0) {
     });
 
    try {
+  console.log("STARTING EMAIL SEND");
+
   await sendVerificationEmail(
     normalizedEmail,
     verificationToken
   );
+
+  console.log("EMAIL SENT SUCCESSFULLY");
+
 } catch (emailError) {
-  console.error(
-    "Email Send Failed:",
-    emailError.message
-  );
+
+  console.error("EMAIL SEND FAILED");
+
+  console.error(emailError);
+
+  console.error(emailError.stack);
 }
 
     // Mark latest webhook log as processed

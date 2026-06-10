@@ -45,7 +45,7 @@ async function getLeads(req, res) {
   try {
     const { q, status, source, company, sort = 'created' } = req.query;
     const query = ownerQuery(req);
-    query.emailVerified = true;
+    // query.emailVerified = true;
 
     if (status && statuses.includes(status)) query.status = status;
     if (source) query.source = source;
